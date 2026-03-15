@@ -106,6 +106,8 @@ pip install torch
 pip install torchreid
 pip install ultralytics
 
+Vui lòng truy cập folder models/models/: để cài thêm thư viện trong file .txt
+
 ================================================== 7. CẤU HÌNH KẾT NỐI
 SQL CHO PYTHON ==================================================
 
