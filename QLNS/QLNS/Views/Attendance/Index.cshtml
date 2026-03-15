@@ -1,0 +1,187 @@
+﻿@using QLNS.Models.ViewModels
+@model AttendanceFilterViewModel
+
+@{
+    ViewData["Title"] = "Chấm công nhân viên";
+}
+
+<div class="attendance-container">
+
+    <!-- HEADER -->
+    <div class="page-header header-flex">
+        <div class="header-text">
+            <h1>Chấm công nhân viên</h1>
+            <p>Quản lý thời gian làm việc hằng ngày</p>
+        </div>
+
+        <div class="camera-controls">
+
+            <!-- MỞ CAMERA -->
+            <button id="btnCheckIn" class="btn btn-success">
+                📷 Chấm công
+            </button>
+
+            <!-- TẮT CAMERA -->
+            <button id="btnStopCamera"
+                    class="btn btn-danger"
+                    style="display:none">
+                ⛔ Tắt camera
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARD -->
+    <div class="attendance-card">
+
+        <!-- FILTER -->
+        <div class="attendance-top">
+         
+            <form method="get"
+                  asp-controller="Attendance"
+                  asp-action="Index"
+                  class="filter-form">
+
+                <input type="text"
+                       name="keyword"
+                       placeholder="Tìm tên / mã NV"
+                       value="@Model.Keyword"
+                       autofocus />
+
+                <select name="departmentId"
+                        onchange="this.form.submit()">
+                    <option value="">-- Phòng ban --</option>
+                    @foreach (var d in ViewBag.Departments)
+                    {
+                        <option value="@d.Id"
+                                selected="@(Model.DepartmentId == d.Id)">
+                            @d.DepartmentName
+                        </option>
+                    }
+                </select>
+                <select name="status" onchange="this.form.submit()">
+                    <option value="">-- Trạng thái --</option>
+                    <option value="Đúng giờ" selected="@(Model.Status == "Đúng giờ")">
+                        Đúng giờ
+                    </option>
+                    <option value="Đi trễ" selected="@(Model.Status == "Đi trễ")">
+                        Đi trễ
+                    </option>
+                    <option value="Chưa chấm công" selected="@(Model.Status == "Chưa chấm công")">
+                        Chưa chấm công
+                    </option>
+                </select>
+
+
+                <input type="date"
+                       name="date"
+                       value="@Model.Date?.ToString("yyyy-MM-dd")"
+                       onchange="this.form.submit()" />
+
+                <!-- nút submit ẨN -->
+                <button type="submit" style="display:none"></button>
+            </form>
+
+            <button type="button"
+                    class="btn-print"
+                    onclick="printAttendance()">
+                🖨️ In danh sách
+            </button>
+
+
+        </div>
+
+        <!-- TABLE -->
+        <table>
+
+
+            <thead>
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ tên</th>
+                    <th>Phòng ban</th>
+                    <th>Giờ vào</th>
+                    <th>Trạng thái</th>
+                   
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (!Model.Data.Any())
+                {
+                    <tr>
+                        <td colspan="6" style="text-align:center">
+                            Chưa có nhân viên chấm công
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.EmployeeCode</td>
+                            <td>@item.FullName</td>
+                            <td>@item.DepartmentName</td>
+                            <td>@(item.CheckIn?.ToString("HH:mm") ?? "-")</td>
+                            <td>
+                                <span class="status
+                                    @(item.Status == "Đi trễ" ? "late" :
+                                      item.Status == "Chưa chấm công" ? "absent" : "present")">
+                                    @item.Status
+                                </span>
+                            </td>
+                           
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+<script>
+    const btnCheckIn = document.getElementById("btnCheckIn");
+    const btnStop    = document.getElementById("btnStopCamera");
+
+    //nút chấm công
+    btnCheckIn.addEventListener("click", function () {
+
+        if (!confirm("Bắt đầu chấm công bằng FaceID?")) return;
+
+        fetch("/Attendance/CheckIn", { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) {
+                    alert(data.message);
+                    return;
+                }
+
+                alert("Camera đã mở");
+                btnCheckIn.style.display = "none";
+                btnStop.style.display = "inline-block";
+            });
+    });
+
+    //nút dừng camera
+    btnStop.addEventListener("click", function () {
+
+        fetch("/Attendance/StopCamera", { method: "POST" })
+            .then(() => {
+                alert("Đã tắt camera");
+                btnStop.style.display = "none";
+                btnCheckIn.style.display = "inline-block";
+            });
+    });
+
+    // nút in danh sách
+     function printAttendance() {
+        const params = new URLSearchParams(window.location.search);
+        window.open("/Attendance/Print?" + params.toString(), "_blank");
+    }
+</script>
+
+

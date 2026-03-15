@@ -1,0 +1,234 @@
+﻿@model IEnumerable<QLNS.Models.User>
+
+@{
+    ViewData["Title"] = "Tài khoản & Phân quyền";
+}
+<link rel="stylesheet" href="~/css/nguoidung.css?v=@DateTime.Now.Ticks" />
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1 class="page-title">Tài khoản & Phân quyền</h1>
+        <p class="page-subtitle">
+            Quản lý tài khoản đăng nhập và vai trò người dùng
+        </p>
+    </div>
+    <div class="toolbar">
+
+        <div class="toolbar-left">
+            <input type="text"
+                   placeholder="🔍 Tìm tài khoản..."
+                   id="searchUser" />
+
+            <select id="filterRole" class="filter-select">
+                <option value="">Tất cả vai trò</option>
+                <option value="Admin">Admin</option>
+                <option value="HR">HR</option>
+                <option value="Employee">Employee</option>
+            </select>
+
+            <select id="filterStatus" class="filter-select">
+                <option value="">Tất cả trạng thái</option>
+                <option value="true">Hoạt động</option>
+                <option value="false">Khóa</option>
+            </select>
+        </div>
+
+    
+
+    </div>
+
+    <!-- ================= TAB ================= -->
+    <div class="tabs">
+        <button class="tab-btn active"
+                onclick="User.switchTab(event,'listTab')">
+            Danh sách tài khoản
+        </button>
+
+        <button class="tab-btn"
+                onclick="User.switchTab(event,'roleTab')">
+            Phân quyền & Quản lý
+        </button>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- TAB 1 : RESET FACE -->
+    <!-- ================================================= -->
+
+    <div id="listTab" class="tab-content active">
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tài khoản</th>
+                        <th>Nhân viên</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th width="180">Thao tác</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><strong>@item.Username</strong></td>
+                            <td>@(item.Employee?.FullName ?? "—")</td>
+
+                            <td>
+                                @foreach (var r in item.UserRoles)
+                                {
+                                    <span class="badge">@r.Role.RoleName</span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="badge badge-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-gray">Khóa</span>
+                                }
+                            </td>
+
+                            <td>
+                                <button class="btn-reset"
+                                        onclick="User.resetFace(@item.Id)">
+                                    Làm mới
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ================================================= -->
+    <!-- TAB 2 : EDIT + DELETE -->
+    <!-- ================================================= -->
+
+    <div id="roleTab" class="tab-content">
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tài khoản</th>
+                        <th>Nhân viên</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th width="180">Thao tác</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><strong>@item.Username</strong></td>
+                            <td>@(item.Employee?.FullName ?? "—")</td>
+
+                            <td>
+                                @foreach (var r in item.UserRoles)
+                                {
+                                    <span class="badge">@r.Role.RoleName</span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="badge badge-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-gray">Khóa</span>
+                                }
+                            </td>
+
+                            <td class="actions">
+
+                                <button class="btn-edit"
+                                        onclick="User.openEdit(
+            @item.Id,
+            '@string.Join(",", item.UserRoles.Select(r=>r.Role.RoleName))',
+            '@item.IsActive'
+        )">
+                                    Sửa
+                                </button>
+
+                                <button class="btn-delete"
+                                        onclick="User.delete(@item.Id)">
+                                    Xóa
+                                </button>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= EDIT USER MODAL ================= -->
+<div class="modal fade" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh sửa tài khoản</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" id="editUserId" />
+
+                <!-- ROLE -->
+                <label>Vai trò</label>
+                <select id="editRole" class="form-select">
+                    <option value="">-- Không thay đổi --</option>
+                    <option value="Admin">Quản trị viên</option>
+                    <option value="HR">HR</option>
+                    <option value="Employee">Nhân viên</option>
+                </select>
+
+                <!-- STATUS -->
+                <label class="mt-3">Trạng thái</label>
+                <select id="editStatus" class="form-select">
+                    <option value="">-- Không thay đổi --</option>
+                    <option value="true">Hoạt động</option>
+                    <option value="false">Khóa</option>
+                </select>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary"
+                        onclick="User.saveEdit()">
+                    Lưu thay đổi
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+   
+<script src="~/js/users.js?v=@DateTime.Now.Ticks"></script>

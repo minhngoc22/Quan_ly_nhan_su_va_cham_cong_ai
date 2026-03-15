@@ -1,0 +1,222 @@
+﻿@model IEnumerable<QLNS.Models.ViewModels.ShiftVM>
+@{
+    ViewData["Title"] = "Quản lý ca làm";
+    string shiftType = ViewBag.ShiftType ?? "WORK";
+}
+
+<link rel="stylesheet" href="~/css/calam.css?v=@DateTime.Now.Ticks" />
+
+<div class="main-content">
+
+    <div class="page-header flex-between">
+
+        <div>
+            <h1 class="page-title">Quản lý ca làm</h1>
+            <p class="page-subtitle">
+                Thiết lập giờ vào ca, ra ca và trạng thái chấm công
+            </p>
+        </div>
+
+        <!-- RIGHT ACTION -->
+        <div class="header-actions">
+
+            <!-- FILTER -->
+            <select class="filter-select"
+                    onchange="Shift.filterStatus(this.value)">
+                <option value="ALL">Tất cả</option>
+                <option value="ACTIVE">Đang hoạt động</option>
+                <option value="INACTIVE">Ngưng</option>
+            </select>
+
+            <!-- ADD BUTTON -->
+            <button class="btn-add"
+                    onclick="Shift.openCreate('@shiftType')">
+
+                @(shiftType == "WORK"
+                    ? "+ Thêm ca làm"
+                    : "+ Thêm ca trực")
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- TAB -->
+    <ul class="nav nav-tabs shift-tabs">
+
+        <li class="nav-item">
+            <a class="nav-link @(shiftType=="WORK"?"active":"")"
+               asp-action="Index"
+               asp-route-shiftType="WORK">
+                🕘 Ca làm
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link @(shiftType=="DUTY"?"active":"")"
+               asp-action="Index"
+               asp-route-shiftType="DUTY">
+                🛎️ Ca trực
+            </a>
+        </li>
+
+    </ul>
+
+    <!-- ================= WORK SHIFT ================= -->
+    @if (shiftType == "WORK")
+    {
+        <div class="table-card">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên ca</th>
+                        <th>Giờ vào</th>
+                        <th>Giờ ra</th>
+                        <th>Giờ tính trễ</th>
+                        <th>Chấm công</th>
+                        <th>Trạng thái</th>
+                        <th width="150">Thao tác</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr data-status="@(item.IsActive ? "ACTIVE" : "INACTIVE")">
+                            <td><strong>@item.Name</strong></td>
+                            <td>@item.StartTime?.ToString("HH:mm")</td>
+                            <td>@item.EndTime?.ToString("HH:mm")</td>
+                            <td>@item.LateThreshold.ToString("HH:mm")</td>
+
+                            <td>
+                                @if (item.IsAttendanceOpen)
+                                {
+                                    <span class="badge badge-success">Đang mở</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-gray">Đã đóng</span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge badge-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-gray">Ngưng</span>
+                                }
+                            </td>
+
+                            <td class="actions">
+
+                                @if (item.IsAttendanceOpen)
+                                {
+                                    <button class="btn-reset"
+                                            onclick="Shift.toggleAttendance(@item.Id)">
+                                        Đóng
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn-delete"
+                                            onclick="Shift.toggleAttendance(@item.Id)">
+                                        Mở
+                                    </button>
+                                }
+
+                                <button class="btn-edit"
+                                        onclick="Shift.openEdit(
+    @item.Id,
+    '@item.Name',
+    '@item.StartTime?.ToString("HH:mm")',
+    '@item.EndTime?.ToString("HH:mm")',
+    '@item.LateThreshold.ToString("HH:mm")',
+    @item.IsActive.ToString().ToLower(),
+    'WORK'
+)">
+                                    Sửa
+                                </button>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    }
+
+    <!-- ================= DUTY SHIFT ================= -->
+    @if (shiftType == "DUTY")
+    {
+    <div class="table-card">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên ca trực</th>
+                    <th>Giờ bắt đầu</th>
+                    <th>Giờ kết thúc</th>
+                    <th>Trạng thái</th>
+                    <th >Thao tác</th>
+                </tr>
+            </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr data-status="@(item.IsActive ? "ACTIVE" : "INACTIVE")">
+                            <td><strong>@item.Name</strong></td>
+                            <td>@item.StartTime?.ToString("HH:mm")</td>
+                            <td>@item.EndTime?.ToString("HH:mm")</td>
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge badge-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-gray">Ngưng</span>
+                                }
+                            </td>
+
+                            <td class="actions">
+
+                                <button class="btn-edit"
+                                        onclick="Shift.openEdit(
+    @item.Id,
+    '@item.Name',
+    '@item.StartTime?.ToString("HH:mm")',
+    '@item.EndTime?.ToString("HH:mm")',
+    '',
+    @item.IsActive.ToString().ToLower(),
+    'DUTY'
+)"
+                )">
+                                    Sửa
+                                </button>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+        </table>
+
+    </div>
+    }
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/calam.js?v=@DateTime.Now.Ticks"></script>

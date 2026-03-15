@@ -1,0 +1,92 @@
+﻿@model IEnumerable<QLNS.Models.ViewModels.AttendanceRowViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách chấm công nhân viên";
+}
+
+
+
+<!-- ================== NỘI DUNG IN ================== -->
+<div class="print-area">
+    <div class="print-container">
+
+        <!-- HEADER -->
+        <div class="print-header">
+            <div class="company">CÔNG TY ____________________</div>
+            <div class="title">DANH SÁCH CHẤM CÔNG NHÂN VIÊN</div>
+            <div class="sub-title">
+                Ngày: @ViewBag.WorkDate
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th class="col-stt">STT</th>
+                    <th class="col-code">MÃ NV</th>
+                    <th style="width:23%">HỌ VÀ TÊN</th>
+                    <th style="width:23%">PHÒNG BAN</th>
+                    <th class="col-time">GIỜ VÀO</th>
+                    <th class="col-status">TRẠNG THÁI</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 1;
+                }
+
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6">Không có dữ liệu</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="col-stt">@stt</td>
+                            <td class="col-code">@item.EmployeeCode</td>
+                            <td class="text-left">@item.FullName</td>
+                            <td class="text-left">@item.DepartmentName</td>
+                            <td class="col-time">@item.CheckIn?.ToString("HH:mm")</td>
+                            <td class="col-status">@item.Status</td>
+
+                        </tr>
+                        stt++;
+                    }
+                }
+            </tbody>
+        </table>
+
+        <!-- FOOTER -->
+        <div class="print-footer">
+            <div class="sign">
+                <div class="sign-title">Người lập</div>
+                <div class="note">(Ký, ghi rõ họ tên)</div>
+            </div>
+
+            <div class="sign">
+                <div class="sign-title">Phòng nhân sự</div>
+                <div class="note">(Ký, ghi rõ họ tên)</div>
+            </div>
+
+            <div class="sign">
+                <div class="sign-title">Giám đốc</div>
+                <div class="note">(Ký, ghi rõ họ tên)</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        window.print();
+    };
+</script>

@@ -1,0 +1,97 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\thuctap\\QLNS\\QLNS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|e:\\thuctap\\qlns\\qlns\\qlns\\models\\faceidhrmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|solutionrelative:qlns\\models\\faceidhrmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|e:\\thuctap\\qlns\\qlns\\qlns\\views\\schedule\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|solutionrelative:qlns\\views\\schedule\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|e:\\thuctap\\qlns\\qlns\\qlns\\wwwroot\\js\\lichlam\\schedule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|solutionrelative:qlns\\wwwroot\\js\\lichlam\\schedule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|e:\\thuctap\\qlns\\qlns\\qlns\\controllers\\leavecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1CFDD19-9888-46B9-9BE6-9E51A1010EA9}|QLNS\\QLNS.csproj|solutionrelative:qlns\\controllers\\leavecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FaceIdHrmsContext.cs",
+              "DocumentMoniker": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Models\\FaceIdHrmsContext.cs",
+              "RelativeDocumentMoniker": "QLNS\\Models\\FaceIdHrmsContext.cs",
+              "ToolTip": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Models\\FaceIdHrmsContext.cs",
+              "RelativeToolTip": "QLNS\\Models\\FaceIdHrmsContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-13T06:20:13.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "schedule.js",
+              "DocumentMoniker": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\lichlam\\schedule.js",
+              "RelativeDocumentMoniker": "QLNS\\wwwroot\\js\\lichlam\\schedule.js",
+              "ToolTip": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\lichlam\\schedule.js",
+              "RelativeToolTip": "QLNS\\wwwroot\\js\\lichlam\\schedule.js",
+              "ViewState": "AgIAAP8BAAAAAAAAAAAUwCQCAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-03-13T06:10:02.541Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Views\\Schedule\\Index.cshtml",
+              "RelativeDocumentMoniker": "QLNS\\Views\\Schedule\\Index.cshtml",
+              "ToolTip": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Views\\Schedule\\Index.cshtml",
+              "RelativeToolTip": "QLNS\\Views\\Schedule\\Index.cshtml",
+              "ViewState": "AgIAANAAAAAAAAAAAAAEwOoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-12T15:16:53.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LeaveController.cs",
+              "DocumentMoniker": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Controllers\\LeaveController.cs",
+              "RelativeDocumentMoniker": "QLNS\\Controllers\\LeaveController.cs",
+              "ToolTip": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\Controllers\\LeaveController.cs",
+              "RelativeToolTip": "QLNS\\Controllers\\LeaveController.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAUwJsAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-12T15:16:40.816Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

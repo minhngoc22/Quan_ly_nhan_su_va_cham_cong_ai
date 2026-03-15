@@ -1,0 +1,63 @@
+﻿/* ===== PROFILE PAGE ===== */
+.profile-page {
+    padding: 24px;
+}
+
+.profile-title {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* FLEX CHIA 2 CỘT */
+.profile-flex {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+/* FORM BÊN TRÁI */
+.profile-form {
+    flex: 1;
+}
+
+/* AVATAR BÊN PHẢI */
+.profile-avatar {
+    width: 220px;
+    text-align: center;
+}
+
+    /* ẢNH AVATAR */
+    .profile-avatar img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #e5e7eb;
+        margin-bottom: 12px;
+    }
+
+/* NÚT ĐỔI ẢNH */
+.upload-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .upload-btn:hover {
+        background: #1e40af;
+    }
+
+/* FORM */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

@@ -1,0 +1,217 @@
+﻿/* ================= HEADER ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Header giữ nguyên */
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* 👇 CHỈ SCROLL BODY */
+tbody {
+    display: block;
+    max-height: 400px; /* chỉnh chiều cao */
+    overflow-y: auto;
+}
+
+    /* optional đẹp hơn */
+    tbody tr:nth-child(even) {
+        background: #f9fafb;
+    }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+    .header h1 {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+/* ================= BUTTON ================= */
+.btn-add {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
+    transition: 0.25s;
+}
+
+    .btn-add:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+    }
+
+/* ===== FILTER ===== */
+.filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* 👈 search nhỏ lại */
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+    .filters :is(input, select) {
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        font-size: 14px;
+    }
+
+        .filters :is(input, select):focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+            outline: none;
+        }
+/* ================= EMPLOYEE CARD ================= */
+.employee-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: all 0.25s ease;
+}
+
+    .employee-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 30px rgba(79, 70, 229, 0.15);
+    }
+
+/* ================= EMPLOYEE ================= */
+.employee-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.employee-info h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.employee-info span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.badge {
+    margin-left: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+.employee-mid {
+    font-size: 14px;
+    color: #374151;
+    white-space: nowrap;
+}
+
+/* ================= ACTION ================= */
+.employee-right button {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: 0.25s;
+}
+
+.btn-detail {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+    .btn-detail:hover {
+        background: #e0e7ff;
+    }
+
+.btn-face {
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    color: #fff;
+    font-size: 15px; /* chữ to hơn */
+    font-weight: 600;
+    padding: 10px 18px; /* nút to hơn */
+    border-radius: 12px;
+}
+
+    .btn-face:hover {
+        box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+    }
+.no-result {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 16px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+/* ================= BUTTON ================= */
+.btn-print {
+    padding: 10px 18px;
+    width: 200px; /* 👈 tăng số này để dài hơn */
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(90deg, #1be6b7, #e6d708);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
+    transition: 0.25s;
+}
+
+    .btn-print:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+    }
+
+.btn-checkbody {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(90deg, #5de4fe, #6366f1);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
+    transition: 0.25s;
+}
+
+   . btn-checkbody:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+    }

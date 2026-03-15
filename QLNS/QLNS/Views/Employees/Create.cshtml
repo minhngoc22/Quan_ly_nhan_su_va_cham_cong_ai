@@ -1,0 +1,192 @@
+﻿@model QLNS.Models.ViewModels.EmployeeCreateVM
+
+
+@{
+    ViewData["Title"] = "Thêm nhân viên";
+}
+
+<form asp-action="Create"
+      method="post"
+      enctype="multipart/form-data"
+      class="container mt-4">
+
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="text-center mb-4">➕ Thêm nhân viên mới</h3>
+
+            <div class="row">
+
+                <!-- ===== LEFT ===== -->
+                <div class="col-md-8">
+                    <div class="row g-3">
+
+                        <!-- MÃ NHÂN VIÊN -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Mã nhân viên</label>
+                            <input asp-for="EmployeeCode"
+                                   id="EmployeeCode"
+                                   class="form-control"
+                                   readonly />
+                            <small class="text-muted">
+                                Mã sẽ tự sinh khi lưu
+                            </small>
+                        </div>
+
+                        <!-- PHÒNG BAN -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Phòng ban</label>
+                            <select asp-for="DepartmentId"
+                                    id="DepartmentId"
+                                    class="form-select"
+                                    onchange="EmployeeCreate.updateEmployeeCode()">
+                                <option value="">-- Chọn phòng ban --</option>
+                                @foreach (var d in ViewBag.Departments)
+                                {
+                                    <option value="@d.Id"
+                                            data-code="@d.DepartmentCode">
+                                        @d.DepartmentName
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- HỌ TÊN -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Họ và tên</label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <!-- GIỚI TÍNH -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Giới tính</label>
+                            <select asp-for="Gender" class="form-select">
+                                <option value="">-- Chọn --</option>
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                                <option>Khác</option>
+                            </select>
+                        </div>
+
+                        <!-- NGÀY SINH -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Ngày sinh</label>
+                            <input asp-for="DateOfBirth"
+                                   type="date"
+                                   class="form-control" />
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+
+                        <!-- SĐT -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Số điện thoại</label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+
+                        <!-- CHỨC VỤ -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Chức vụ</label>
+                            <select asp-for="PositionId"
+                                    id="PositionId"
+                                    class="form-select"
+                                    onchange="EmployeeCreate.updateEmployeeCode()">
+                                <option value="">-- Chọn chức vụ --</option>
+                                @foreach (var p in ViewBag.Positions)
+                                {
+                                    <option value="@p.Id"
+                                            data-code="@p.PositionCode">
+                                        @p.PositionName
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- KINH NGHIỆM (COMBO) -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Kinh nghiệm</label>
+                            <select asp-for="ExperienceLevelId"
+                                    class="form-select">
+                                <option value="">-- Chưa xác định --</option>
+                                @foreach (var e in ViewBag.ExperienceLevels)
+                                {
+                                    <option value="@e.Id">
+                                        @e.LevelName
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- NGÀY VÀO LÀM -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Ngày vào làm</label>
+                            <input asp-for="HireDate"
+                                   type="date"
+                                   class="form-control" />
+                        </div>
+
+                        <!-- TRẠNG THÁI -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Trạng thái</label>
+                            <select asp-for="Status" class="form-select">
+                                <option>Đang làm</option>
+                                <option>Nghỉ việc</option>
+                            </select>
+                        </div>
+
+                        <!-- ĐỊA CHỈ -->
+                        <div class="col-12">
+                            <label class="fw-bold">Địa chỉ</label>
+                            <input asp-for="Address" class="form-control" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT ===== -->
+                <div class="col-md-4 text-center">
+                    <img id="avatarPreview"
+                         src="/images/default.jpg"
+                         class="border shadow mb-3"
+                         style="width:180px;height:240px;object-fit:cover;" />
+
+                    <label class="btn btn-outline-primary btn-sm">
+                        Chọn ảnh
+                        <input type="file"
+                               name="avatarFile"
+                               hidden
+                               accept="image/*"
+                               onchange="EmployeeCreate.previewAvatar(this)" />
+                    </label>
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+                <button type="submit" class="btn btn-primary">
+                    Thêm nhân viên
+                </button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        window.CREATE_USER_SUCCESS = @((TempData["CreateUserSuccess"] != null).ToString().ToLower());
+        window.CREATE_USERNAME = "@TempData["Username"]";
+        window.CREATE_PASSWORD = "@TempData["DefaultPassword"]";
+        window.CREATE_REDIRECT_URL = "@TempData["RedirectUrl"]";
+    </script>
+
+    <script src="~/js/nhanvien/createNV.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,152 @@
+﻿@model QLNS.Models.Employee
+
+@{
+    ViewData["Title"] = "Chi tiết nhân viên";
+    Layout = "_Layout";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <h1 class="page-title">Chi tiết nhân viên</h1>
+
+    <a asp-controller="Employees"
+       asp-action="Index"
+       class="btn btn-outline-secondary">
+        ← Quay lại
+    </a>
+
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div class="row">
+            <!-- THÔNG TIN -->
+            <div class="col-md-8">
+                <h4 class="mb-3">
+                    @(Model?.FullName ?? "Chưa có tên")
+                    <span class="badge ">@Model?.Status</span>
+                </h4>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <strong>Mã nhân viên:</strong> @Model?.EmployeeCode
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Ngày sinh:</strong>
+                        @Model?.DateOfBirth?.ToString("dd/MM/yyyy")
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Email:</strong> @Model?.Email
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Phòng ban:</strong>
+                        @Model?.Department?.DepartmentName
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Chức vụ:</strong>
+                        @Model?.Position?.PositionName
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Ngày vào làm:</strong>
+                        @Model?.HireDate?.ToString("dd/MM/yyyy")
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Kinh nghiệm:</strong>
+                        @Model?.ExperienceLevel?.LevelName
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <strong>SĐT:</strong> @Model?.Phone
+                    </div>
+
+                    <div class="col-12">
+                        <strong>Địa chỉ:</strong> @Model?.Address
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- AVATAR 3x4 -->
+            <div class="col-md-4 text-center">
+                <img src="@(string.IsNullOrEmpty(Model?.Avatar)
+                            ? "/images/default-3x4.jpg"
+                            : Model.Avatar)"
+                     alt="Ảnh nhân viên"
+                     class="shadow border"
+                     style="
+                        width:180px;
+                        height:240px;   /* 3x4 */
+                        object-fit:cover;
+                     " />
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-center gap-2">
+           
+
+            <div class="d-flex justify-content-center gap-2">
+
+                <a asp-action="Edit" asp-route-id="@Model?.Id"
+                   class="btn btn-warning">
+                    Chỉnh sửa
+                </a>
+
+                <!-- REGISTER FACE -->
+                <a class="btn btn-primary"
+                   onclick="registerFace('@Model.EmployeeCode')">
+                    Đăng ký khuôn mặt
+                </a>
+
+                <!-- REGISTER BODY -->
+                <a class="btn btn-success"
+                   onclick="registerBody('@Model.EmployeeCode')">
+                    Đăng ký dáng người
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function registerFace(employeeCode) {
+        fetch('/Employees/RegisterFace', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                employeeCode: employeeCode
+            })
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(() => alert('FaceID service không chạy'));
+    }
+
+    function registerBody(employeeCode) {
+        fetch('/Employees/RegisterBody', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                employeeCode: employeeCode
+            })
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(() => alert('BodyID service không chạy'));
+    }
+</script>
+

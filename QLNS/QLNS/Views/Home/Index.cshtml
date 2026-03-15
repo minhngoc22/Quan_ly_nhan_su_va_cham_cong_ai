@@ -1,0 +1,129 @@
+﻿@model QLNS.Models.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Bảng điều khiển";
+}
+
+<div class="main-content">
+    <div class="dashboard">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <h1 class="page-title">Bảng điều khiển</h1>
+            <p class="page-subtitle">Tổng quan hệ thống nhân sự</p>
+        </div>
+
+        <!-- KPI -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <p class="stat-title">Tổng nhân viên</p>
+                <h2>@Model.TotalEmployees</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Đang làm</p>
+                <h2>@Model.ActiveEmployees</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Nghỉ việc</p>
+                <h2>@Model.InactiveEmployees</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">NV mới tháng này</p>
+                <h2>@Model.NewEmployeesThisMonth</h2>
+            </div>
+
+            <div class="stat-card highlight">
+                <p class="stat-title">Chấm công hôm nay</p>
+                <h2>@Model.TodayAttendance</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Vắng mặt</p>
+                <h2>@Model.AbsentToday</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Đi trễ</p>
+                <h2>@Model.LateToday</h2>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Chưa đăng ký FaceID</p>
+                <h2>@Model.EmployeesWithoutFace</h2>
+            </div>
+
+        </div>
+
+        <!-- ACTIVITY + WARNING -->
+        <div class="row g-4 mt-3">
+
+            <!-- LOG -->
+            <div class="col-12 col-lg-8">
+                <div class="activity">
+                    <div class="activity-header">
+                        <h3>Hoạt động gần đây</h3>
+                        <p class="activity-sub">Lịch sử thao tác hệ thống</p>
+                    </div>
+
+                    <ul class="activity-list">
+                        @if (Model.RecentActivities.Any())
+                        {
+                            foreach (var item in Model.RecentActivities)
+                            {
+                                <li>
+                                    <div>
+                                        <span>@item.Action</span>
+                                        <small>@item.UserName (@item.Position)</small>
+                                    </div>
+                                    <em>@item.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</em>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li><em>Chưa có hoạt động</em></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CẢNH BÁO -->
+            <div class="col-12 col-lg-4">
+                <div class="activity warning">
+                    <div class="activity-header">
+                        <h3>⚠️ Cảnh báo</h3>
+                        <p class="activity-sub">Cần xử lý</p>
+                    </div>
+
+                    <ul class="activity-list">
+                        <li>
+                            <span>@Model.EmployeesWithoutFace nhân viên</span>
+                            <small>Chưa đăng ký FaceID</small>
+                        </li>
+                        <li>
+                            <span>@Model.LateToday lượt</span>
+                            <small>Đi trễ hôm nay</small>
+                        </li>
+                        <li>
+                            <span>@Model.AbsentToday nhân viên</span>
+                            <small>Vắng mặt hôm nay</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTION -->
+        <div class="quick-actions">
+            <a asp-controller="Employees" asp-action="Create">➕ Thêm nhân viên</a>
+            <a asp-controller="Attendances" asp-action="Index">📅 Chấm công</a>
+            <a asp-controller="Reports" asp-action="Index">📊 Báo cáo</a>
+        </div>
+
+    </div>
+</div>

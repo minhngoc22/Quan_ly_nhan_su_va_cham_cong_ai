@@ -1,0 +1,465 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\QLNS.bundle.scp.css",
+      "PackagePath": "staticwebassets\\QLNS.vww8pfs43f.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\baocao\\report_css.css",
+      "PackagePath": "staticwebassets\\css\\baocao\\report_css.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\calam.css",
+      "PackagePath": "staticwebassets\\css\\calam.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\chamcong\\chamcong_css.css",
+      "PackagePath": "staticwebassets\\css\\chamcong\\chamcong_css.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\chamcong\\print_css.css",
+      "PackagePath": "staticwebassets\\css\\chamcong\\print_css.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\components.css",
+      "PackagePath": "staticwebassets\\css\\components.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\home\\home_css.css",
+      "PackagePath": "staticwebassets\\css\\home\\home_css.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\layout.css",
+      "PackagePath": "staticwebassets\\css\\layout.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\lichlam\\Mylichlam.css",
+      "PackagePath": "staticwebassets\\css\\lichlam\\Mylichlam.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\lichlam\\lichlam_css.css",
+      "PackagePath": "staticwebassets\\css\\lichlam\\lichlam_css.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\nguoidung.css",
+      "PackagePath": "staticwebassets\\css\\nguoidung.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\nv\\employee.css",
+      "PackagePath": "staticwebassets\\css\\nv\\employee.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\nv\\profile.css",
+      "PackagePath": "staticwebassets\\css\\nv\\profile.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\nv\\staff-index.css",
+      "PackagePath": "staticwebassets\\css\\nv\\staff-index.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\phongban.css",
+      "PackagePath": "staticwebassets\\css\\phongban.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\css\\staff\\profile.css",
+      "PackagePath": "staticwebassets\\css\\staff\\profile.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\ai.png",
+      "PackagePath": "staticwebassets\\icon\\ai.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\coffee.png",
+      "PackagePath": "staticwebassets\\icon\\coffee.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\favicon.ico",
+      "PackagePath": "staticwebassets\\icon\\favicon.ico"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\fortune.png",
+      "PackagePath": "staticwebassets\\icon\\fortune.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\luck.png",
+      "PackagePath": "staticwebassets\\icon\\luck.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\mood.png",
+      "PackagePath": "staticwebassets\\icon\\mood.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\start.png",
+      "PackagePath": "staticwebassets\\icon\\start.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\sun.png",
+      "PackagePath": "staticwebassets\\icon\\sun.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\time.png",
+      "PackagePath": "staticwebassets\\icon\\time.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\warn.png",
+      "PackagePath": "staticwebassets\\icon\\warn.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\icon\\work.png",
+      "PackagePath": "staticwebassets\\icon\\work.png"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\0db5f695-3801-4c4d-8c77-a1c867a464e1.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\0db5f695-3801-4c4d-8c77-a1c867a464e1.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\0ebf0d08-b66f-486a-b054-9a81547d8011.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\0ebf0d08-b66f-486a-b054-9a81547d8011.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\27a7bf8d-f994-4010-9483-94e557bb0ecc.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\27a7bf8d-f994-4010-9483-94e557bb0ecc.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\4563797f-0fae-4aae-983b-56a23193eba4.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\4563797f-0fae-4aae-983b-56a23193eba4.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\6498b205-e2b4-49d8-a311-14eb4ae7912b.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\6498b205-e2b4-49d8-a311-14eb4ae7912b.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\76853ac2-8603-4167-a40a-da6878e0e9f8.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\76853ac2-8603-4167-a40a-da6878e0e9f8.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\7b154227-04fe-4958-9c86-be81dbca3f95.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\7b154227-04fe-4958-9c86-be81dbca3f95.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\85a05b6e-0278-4f63-a8e1-302b3a7f5a35.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\85a05b6e-0278-4f63-a8e1-302b3a7f5a35.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\96c4ffea-6311-4091-90c9-323bb0b2dea5.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\96c4ffea-6311-4091-90c9-323bb0b2dea5.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\a1440a4e-d52f-4d20-9d78-0a1163a8d253.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\a1440a4e-d52f-4d20-9d78-0a1163a8d253.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\c5b47ff6-5b47-437b-b427-87cca6daa89e.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\c5b47ff6-5b47-437b-b427-87cca6daa89e.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\d0af11d2-08e6-46a9-a4f1-fe68a90f3cac.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\d0af11d2-08e6-46a9-a4f1-fe68a90f3cac.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\e31818c1-2d3b-47b1-84d8-9b82d90bb678.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\e31818c1-2d3b-47b1-84d8-9b82d90bb678.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\avatars\\edb40a47-8c07-4565-9fd8-2a1ebeb1a0f0.jpg",
+      "PackagePath": "staticwebassets\\images\\avatars\\edb40a47-8c07-4565-9fd8-2a1ebeb1a0f0.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\images\\default.jpg",
+      "PackagePath": "staticwebassets\\images\\default.jpg"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\calam.js",
+      "PackagePath": "staticwebassets\\js\\calam.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\department.js",
+      "PackagePath": "staticwebassets\\js\\department.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\lichlam\\schedule.js",
+      "PackagePath": "staticwebassets\\js\\lichlam\\schedule.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\nhanvien\\createNV.js",
+      "PackagePath": "staticwebassets\\js\\nhanvien\\createNV.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\js\\users.js",
+      "PackagePath": "staticwebassets\\js\\users.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\thuctap\\QLNS\\QLNS\\QLNS\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.QLNS.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.QLNS.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.QLNS.props",
+      "PackagePath": "build\\QLNS.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.QLNS.props",
+      "PackagePath": "buildMultiTargeting\\QLNS.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.QLNS.props",
+      "PackagePath": "buildTransitive\\QLNS.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

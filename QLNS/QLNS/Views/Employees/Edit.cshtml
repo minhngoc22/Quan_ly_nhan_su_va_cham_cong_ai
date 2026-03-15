@@ -1,0 +1,177 @@
+﻿@model QLNS.Models.ViewModels.EmployeeProfileVM
+
+@{
+    ViewData["Title"] = "Chỉnh sửa hồ sơ nhân viên";
+}
+
+<form asp-action="Edit"
+      method="post"
+      enctype="multipart/form-data"
+      class="container mt-4">
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="EmployeeCode" />
+    <input type="hidden" asp-for="DepartmentId" />
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="text-center mb-4">Chỉnh sửa hồ sơ nhân viên</h3>
+
+            <div class="row">
+
+                <!-- ===== LEFT ===== -->
+                <div class="col-md-8">
+                    <div class="row g-3">
+
+                        <!-- MÃ NV (KHÓA) -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Mã nhân viên</label>
+                            <input class="form-control"
+                                   value="@Model.EmployeeCode"
+                                   disabled />
+                        </div>
+
+                        <!-- PHÒNG BAN (KHÓA) -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Phòng ban</label>
+                            <select class="form-select" disabled>
+                                @foreach (var d in ViewBag.Departments)
+                                {
+                                    <option selected="@(d.Id == Model.DepartmentId)">
+                                        @d.DepartmentName
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- HỌ TÊN -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Họ và tên</label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <!-- GIỚI TÍNH -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Giới tính</label>
+                            <select asp-for="Gender" class="form-select">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-bold">Ngày sinh</label>
+                            <input asp-for="DateOfBirth"
+                                   type="date"
+                                   class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+
+                        <!-- ĐIỆN THOẠI -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Số điện thoại</label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+
+                        <!-- TRẠNG THÁI -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Trạng thái</label>
+                            <select asp-for="Status" class="form-select">
+                                <option value="Đang làm">Đang làm</option>
+                                <option value="Nghỉ việc">Nghỉ việc</option>
+                            </select>
+                        </div>
+
+                        <!-- CHỨC VỤ -->
+                        <select asp-for="PositionId"
+                                asp-items="@(new SelectList(ViewBag.Positions, "Id", "PositionName"))"
+                                class="form-select">
+                        </select>
+
+                        <!-- KINH NGHIỆM -->
+                        <div class="col-md-6">
+                            <label class="fw-bold">Kinh nghiệm</label>
+                            <select asp-for="ExperienceLevelId"
+                                    class="form-select">
+                                @foreach (var e in ViewBag.ExperienceLevels)
+                                {
+                                    <option value="@e.Id">@e.LevelName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- ĐỊA CHỈ -->
+                        <div class="col-12">
+                            <label class="fw-bold">Địa chỉ</label>
+                            <input asp-for="Address" class="form-control" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT / AVATAR ===== -->
+                <div class="col-md-4 text-center">
+
+                    <img id="avatarPreview"
+                         src="@(string.IsNullOrEmpty(Model.Avatar)
+                                ? "/images/default.jpg"
+                                : Model.Avatar)"
+                         class="border shadow mb-3"
+                         style="width:180px;height:240px;object-fit:cover;" />
+
+                    <div>
+                        <label class="btn btn-outline-primary btn-sm">
+                            Đổi ảnh
+                            <input type="file"
+                                   name="avatarFile"
+                                   hidden
+                                   accept="image/*"
+                                   onchange="previewAvatar(this)" />
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="d-flex justify-content-center gap-2">
+                <a asp-action="Details"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-secondary">
+                    Quay lại
+                </a>
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Cập nhật
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function previewAvatar(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById("avatarPreview").src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

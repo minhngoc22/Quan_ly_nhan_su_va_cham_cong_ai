@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+
+<link rel="stylesheet" href="~/css/login.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<div class="auth-wrapper">
+    <div class="col-12 col-lg-8">
+        <div class="card shadow-lg p-4">
+
+            <!-- ================= STEP 1: CHỌN ROLE (NGANG) ================= -->
+            <div id="roleStep">
+                <h4 class="text-center mb-2">👤 Chọn phân quyền</h4>
+                <p class="text-center text-muted mb-4">
+                    Vui lòng chọn vai trò để tiếp tục
+                </p>
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+                        <div class="role-card role-admin" onclick="selectRole('Admin')">
+                            <div class="role-icon">🛡️</div>
+                            <div class="role-title">Admin</div>
+                            <div class="role-desc">Quản trị hệ thống</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="role-card role-hr" onclick="selectRole('HR')">
+                            <div class="role-icon">🧑‍💼</div>
+                            <div class="role-title">HR</div>
+                            <div class="role-desc">Nhân sự</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="role-card role-staff" onclick="selectRole('Employee')">
+                            <div class="role-icon">👨‍💻</div>
+                            <div class="role-title">Staff</div>
+                            <div class="role-desc">Nhân viên</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= STEP 2: LOGIN ================= -->
+            <div id="loginStep" style="display:none;">
+                <h4 class="text-center mb-2">🔐 Đăng nhập</h4>
+
+                <p class="text-center text-muted mb-4">
+                    Vai trò:
+                    <span class="badge bg-primary" id="selectedRoleText"></span>
+                </p>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form method="post" asp-action="Login">
+                    <input type="hidden" name="role" id="selectedRole" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Tên đăng nhập</label>
+                        <input name="username"
+                               class="form-control form-control-lg"
+                               placeholder="VD: IT-NV-001"
+                               required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu</label>
+                        <input name="password"
+                               type="password"
+                               class="form-control form-control-lg"
+                               required />
+                    </div>
+                    <div class="text-warning mt-1 d-none" id="capsWarning">
+                        ⚠️ Caps Lock đang bật
+                    </div>
+
+
+                    <button type="submit"
+                            class="btn btn-primary btn-lg w-100 mb-2">
+                        Đăng nhập
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-link w-100"
+                            onclick="backToRole()">
+                        ← Quay lại chọn phân quyền
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        window.loginState = {
+            stayOnLogin: @(ViewBag.StayOnLogin == true ? "true" : "false"),
+            selectedRole: '@ViewBag.SelectedRole'
+        };
+        window.loginConfig = {
+               successMessage: @Html.Raw(Json.Serialize(ViewBag.Success)),
+               redirectUrl: '@ViewBag.RedirectUrl'
+           };
+    </script>
+
+
+    <script src="~/js/login.js"></script>
+}

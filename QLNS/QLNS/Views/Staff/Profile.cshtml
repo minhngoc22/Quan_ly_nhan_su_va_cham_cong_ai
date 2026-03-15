@@ -1,0 +1,125 @@
+﻿@model QLNS.Models.ViewModels.StaffProfileViewModel
+@using QLNS.Models.ViewModels
+<link rel="stylesheet" href="~/css/staff/profile.css" />
+@{
+    ViewData["Title"] = "Hồ sơ cá nhân";
+    Layout = "_Layout";
+}
+
+<div class="page-header mb-4">
+    <h1 class="page-title">Hồ sơ cá nhân</h1>
+</div>
+
+<ul class="profile-tabs mb-4">
+    <li class="active" onclick="switchSection('profile', this)">
+        👤 Thông tin cá nhân
+    </li>
+    <li onclick="switchSection('password', this)">
+        🔐 Đổi mật khẩu
+    </li>
+</ul>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <!-- ================== THÔNG TIN NHÂN VIÊN ================== -->
+        <section id="profileSection">
+            <h4 class="mb-3">👤 Thông tin cá nhân</h4>
+
+            <form asp-action="Profile" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <strong>Mã nhân viên</strong>
+                        <input class="form-control mt-1" value="@Model.EmployeeCode" disabled />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Họ tên</strong>
+                        <input asp-for="FullName" class="form-control mt-1" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Giới tính</strong>
+                        <select asp-for="Gender" class="form-select mt-1">
+                            <option>Nam</option>
+                            <option>Nữ</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Ngày sinh</strong>
+                        <input asp-for="DateOfBirth" type="date" class="form-control mt-1" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Email</strong>
+                        <input asp-for="Email" class="form-control mt-1" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>SĐT</strong>
+                        <input asp-for="Phone" class="form-control mt-1" />
+                    </div>
+
+                    <div class="col-12">
+                        <strong>Địa chỉ</strong>
+                        <input asp-for="Address" class="form-control mt-1" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Phòng ban</strong>
+                        <input class="form-control mt-1" value="@Model.DepartmentName" disabled />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Chức vụ</strong>
+                        <input class="form-control mt-1" value="@Model.PositionName" disabled />
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button class="btn btn-success">💾 Lưu thông tin</button>
+                </div>
+            </form>
+        </section>
+
+
+        <section id="passwordSection" style="display:none">
+            <h4 class="mb-3 text-danger">🔐 Đổi mật khẩu</h4>
+
+            <form asp-action="ChangePassword" method="post" class="col-md-6">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="fw-semibold">Mật khẩu hiện tại</label>
+                    <input name="CurrentPassword" type="password" class="form-control mt-1" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold">Mật khẩu mới</label>
+                    <input name="NewPassword" type="password" class="form-control mt-1" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold">Xác nhận mật khẩu</label>
+                    <input name="ConfirmPassword" type="password" class="form-control mt-1" required />
+                </div>
+
+                <button class="btn btn-danger">🔄 Đổi mật khẩu</button>
+            </form>
+        </section>
+
+
+    </div>
+</div>
+<script>
+    function switchSection(value) {
+        document.getElementById("profileSection").style.display =
+            value === "profile" ? "block" : "none";
+
+        document.getElementById("passwordSection").style.display =
+            value === "password" ? "block" : "none";
+    }
+</script>

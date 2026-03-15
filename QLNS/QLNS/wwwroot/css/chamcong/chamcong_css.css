@@ -1,0 +1,165 @@
+﻿
+body {
+    background: #f4f6f9;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.attendance-container {
+    padding: 30px;
+}
+
+.page-header {
+    margin-bottom: 25px;
+    display: flex; /* 🔥 BẮT BUỘC */
+    justify-content: space-between;
+    align-items: center; /* 🔥 CHỐNG RỚT NÚT */
+}
+
+    .page-header h1 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .page-header p {
+        color: #6c757d;
+    }
+
+.attendance-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.attendance-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .attendance-top input[type="date"] {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f1f3f6;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    font-weight: 600;
+    color: #555;
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+    tbody tr:hover {
+        background: #f9fbff;
+    }
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.present {
+    background: #e6f7ee;
+    color: #1f9254;
+}
+
+.late {
+    background: #fff4e5;
+    color: #c77700;
+}
+
+.absent {
+    background: #fdecea;
+    color: #d93025;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-checkin {
+    background: #0d6efd;
+    color: #fff;
+}
+
+.btn-checkout {
+    background: #6c757d;
+    color: #fff;
+}
+
+/* ===== FILTER FORM ===== */
+.filter-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+    .filter-form input[type="text"],
+    .filter-form select,
+    .filter-form input[type="date"] {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.2s ease;
+        background: #fff;
+    }
+
+        /* focus */
+        .filter-form input:focus,
+        .filter-form select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 2px rgba(13,110,253,0.15);
+        }
+
+    /* select arrow đẹp hơn */
+    .filter-form select {
+        cursor: pointer;
+    }
+
+    /* placeholder */
+    .filter-form input::placeholder {
+        color: #aaa;
+    }
+
+/* responsive */
+@media (max-width: 768px) {
+    .filter-form {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+        .filter-form input,
+        .filter-form select {
+            width: 100%;
+        }
+}
+
+

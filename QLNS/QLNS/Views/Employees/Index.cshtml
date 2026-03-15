@@ -1,0 +1,198 @@
+﻿@using QLNS.Models
+
+@{
+    ViewData["Title"] = "Quản lý nhân viên";
+}
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Quản lý nhân viên</h1>
+
+
+        <a asp-action="Create"
+           asp-controller="Employees"
+           class="btn-add">
+            + Thêm nhân viên
+        </a>
+    </div>
+
+
+
+<!-- FILTER -->
+<form method="get" action="/Employees/Index" class="filters">
+
+
+    <!-- SEARCH -->
+    <input type="text"
+           name="search"
+           placeholder="Tìm theo tên, mã NV, email..."
+           value="@(ViewBag.CurrentSearch ?? "")"
+           onkeydown="if(event.key === 'Enter') this.form.submit();" />
+
+    <!-- DEPARTMENT -->
+    <select name="departmentId" onchange="this.form.submit()">
+        <option value="">Tất cả phòng ban</option>
+        @foreach (var dept in ViewBag.Departments as List<Department>)
+        {
+            <option value="@dept.Id"
+                    selected="@(ViewBag.CurrentDeptId == dept.Id)">
+                @dept.DepartmentName
+            </option>
+
+        }
+    </select>
+
+    <!-- STATUS -->
+    <select name="status" onchange="this.form.submit()">
+        <option value="">Tất cả trạng thái</option>
+        <option value="Đang làm"
+                selected="@(ViewBag.CurrentStatus == "Đang làm")">
+            Đang làm việc
+        </option>
+
+        <option value="Nghỉ việc"
+                selected="@(ViewBag.CurrentStatus == "Nghỉ việc")">
+            Nghỉ việc
+        </option>
+
+    </select>
+    <select name="hireMonth" onchange="this.form.submit()">
+        <option value="">Tháng vào làm</option>
+        @for (int m = 1; m <= 12; m++)
+        {
+            <option value="@m"
+                    selected="@(ViewBag.CurrentHireMonth == m)">
+                Tháng @m
+            </option>
+        }
+    </select>
+
+
+</form>
+
+<!-- EMPLOYEE LIST -->
+<!-- EMPLOYEE LIST -->
+@{
+    var employees = ViewBag.Employees as List<Employee>;
+}
+
+@if (employees != null && employees.Any())
+{
+    foreach (var emp in employees)
+    {
+        <div class="employee-card">
+
+            <div class="employee-left">
+                <div class="avatar">
+                    @(string.IsNullOrEmpty(emp.FullName) ? "?" : emp.FullName[0])
+                </div>
+
+                <div class="employee-info">
+                    <h3>
+                        @emp.FullName
+                        <span class="badge">@emp.Status</span>
+                    </h3>
+                    <span>@emp.EmployeeCode • @emp.Email</span>
+                </div>
+            </div>
+
+            <div class="employee-mid">
+                @emp.Position?.PositionName •
+                @emp.Department?.DepartmentName •
+                @(emp.HireDate?.ToString("dd/MM/yyyy") ?? "")
+            </div>
+
+            <div class="employee-right">
+                <div class="employee-actions">
+
+                    <a class="btn-detail"
+                       href="@Url.Action("Details", "Employees", new { id = emp.Id })">
+                        👁 Chi tiết
+                    </a>
+                        <button class="btn-checkbody"
+                                data-id="@emp.Id">
+                            🧍 Check dáng
+                        </button>
+
+                        <button class="btn-stopbody"
+                                style="display:none">
+                            ⛔ Tắt camera
+                        </button>
+
+                </div>
+              
+            </div>
+
+        </div>
+    }
+}
+else
+{
+    <div class="no-result">
+        Không tìm thấy nhân viên
+    </div>
+}
+
+<script>
+    document.querySelectorAll(".employee-card")
+    .forEach(card => {
+
+        const btnStart = card.querySelector(".btn-checkbody");
+        const btnStop  = card.querySelector(".btn-stopbody");
+
+        btnStart.addEventListener("click", async () => {
+
+            const empId = btnStart.dataset.id;
+
+            if (!confirm("Bắt đầu kiểm tra dáng?")) return;
+
+            btnStart.classList.add("loading");
+            btnStart.innerText = "Đang mở camera...";
+
+            try {
+
+                const res = await fetch("/Attendance/CheckBody", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        employeeId: empId
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!data.success) {
+                    alert(data.message);
+                    btnStart.innerText = "🧍 Check dáng";
+                    btnStart.classList.remove("loading");
+                    return;
+                }
+
+                // ✅ SHOW STOP BUTTON
+                btnStart.style.display = "none";
+                btnStop.style.display = "inline-block";
+
+            } catch {
+                alert("Không kết nối được camera");
+            }
+
+            btnStart.classList.remove("loading");
+        });
+
+
+        // ================= STOP =================
+        btnStop.addEventListener("click", async () => {
+
+            await fetch("/Attendance/StopCamera", {
+                method: "POST"
+            });
+
+            btnStop.style.display = "none";
+            btnStart.style.display = "inline-block";
+            btnStart.innerText = "🧍 Check dáng";
+        });
+
+    });
+</script>

@@ -1,0 +1,346 @@
+﻿@model List<QLNS.Models.ViewModels.ScheduleViewModel>
+
+<link rel="stylesheet" href="~/css/lichlam/lichlam_css.css?v=@DateTime.Now.Ticks" />
+
+
+@{
+    ViewData["Title"] = "Quản lý lịch làm việc";
+
+    string q(string key) => Context.Request.Query[key];
+    string shiftType = q("shiftType");
+    if (string.IsNullOrEmpty(shiftType))
+    {
+        shiftType = "WORK";
+    }
+}
+
+<!-- ================= HEADER ================= -->
+<div class="schedule-header">
+    <h2>Quản lý lịch làm việc</h2>
+    <p>Phân ca và theo dõi lịch làm việc của nhân viên</p>
+</div>
+
+<!-- ================= FILTER ================= -->
+<div class="schedule-filters">
+    <form method="get" class="filter-form">
+        <input type="hidden" name="shiftType" value="@shiftType" />
+
+        <input type="text"
+               name="keyword"
+               value="@q("keyword")"
+               placeholder="🔍 Tìm theo tên nhân viên..." />
+
+        <select name="departmentId">
+            <option value="">Tất cả phòng ban</option>
+            @foreach (var d in ViewBag.Departments)
+            {
+                <option value="@d.Id"
+                        selected="@(q("departmentId") == d.Id.ToString())">
+                    @d.DepartmentName
+                </option>
+            }
+        </select>
+
+        <select name="shiftId">
+            <option value="">Tất cả ca</option>
+            @foreach (var s in ViewBag.Shifts)
+            {
+                <option value="@s.Id"
+                        selected="@(q("shiftId") == s.Id.ToString())">
+                    @s.ShiftName
+                </option>
+            }
+        </select>
+
+        <input type="date" name="fromDate" value="@q("fromDate")" />
+        <input type="date" name="toDate" value="@q("toDate")" />
+
+        <button type="submit" class="btn-filter">Lọc</button>
+    </form>
+
+    @if (shiftType == "WORK")
+    {
+        <button class="btn-add" onclick="Schedule.openGenerate()">
+            📅 Tạo lịch làm
+        </button>
+       
+    }
+    else if (shiftType == "DUTY")
+    {
+        <button class="btn btn-shift" onclick="Schedule.openGenerateDuty()">
+            🛎️ Tạo lịch trực
+        </button>
+    }
+    else if (shiftType == "LEAVE")
+    {
+        <button class="btn-add"
+                onclick="Schedule.openLeaveAll()">
+            🏖️   Tạo lịch nghỉ
+        </button>
+    }
+
+</div>
+
+<!-- ================= TAB ================= -->
+<ul class="nav nav-tabs mt-3 schedule-tabs">
+    <li class="nav-item">
+        <a class="nav-link @(shiftType == "WORK" ? "active" : "")"
+           asp-action="Index"
+           asp-route-shiftType="WORK">
+            🕘 Ca làm
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @(shiftType == "DUTY" ? "active" : "")"
+           asp-action="Index"
+           asp-route-shiftType="DUTY">
+            🛎️ Ca trực
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link @(shiftType == "LEAVE" ? "active" : "")"
+           asp-action="Index"
+           asp-route-shiftType="LEAVE">
+            🏖️ Lịch nghỉ
+        </a>
+    </li>
+</ul>
+
+
+
+<!-- ================= TABLE ================= -->
+<div class="schedule-card">
+    <div class="table-scroll">
+    <table>
+        <thead>
+            <tr>
+                <th>Nhân viên</th>
+                <th>Phòng ban</th>
+                <th>Ngày</th>
+                <th>
+                    @if (shiftType == "WORK")
+                    {
+                        @:Ca làm
+                    }
+                    else if (shiftType == "DUTY")
+                    {
+                        @:Ca trực
+                    }
+                    else
+                    {
+                        @:Loại nghỉ
+                    }
+                </th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        Không có dữ liệu
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@item.EmployeeName</strong><br />
+                            <small>@item.EmployeeStatus</small>
+                        </td>
+
+                        <td>@item.DepartmentName</td>
+
+                        <td>@item.WorkDate.ToString("dd/MM/yyyy")</td>
+
+                        <td>
+                            <span class="badge badge-shift">
+                                @if (shiftType == "WORK")
+                                {
+                                    @item.ShiftName
+                                }
+                                else if (shiftType == "DUTY")
+                                {
+                                    @item.DutyName
+                                }
+                                else
+                                {
+                                    @item.LeaveType
+                                }
+                            </span>
+                        </td>
+
+                        <td>
+                            @if (shiftType == "WORK")
+                            {
+                                if (item.IsOnLeave)
+                                {
+                                    <span class="badge bg-warning">
+                                        Nghỉ @item.LeaveType
+                                    </span>
+                                }
+                                else if (item.HasAttendance)
+                                {
+                                    <span class="badge bg-success">Đi làm</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Vắng</span>
+                                }
+                            }
+                            else if (shiftType == "DUTY")
+                            {
+                                if (item.HasDutyAttendance)
+                                {
+                                    <span class="badge bg-success">Đã trực</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Chưa trực</span>
+                                }
+                            }
+                            else if (shiftType == "LEAVE")
+                            {
+                                if (item.IsCompanyLeave)
+                                {
+                                    <span class="badge bg-primary">
+                                        Nghỉ toàn công ty
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info text-dark">
+                                        Nghỉ cá nhân
+                                    </span>
+                                }
+                            }
+                        </td>
+
+                       
+
+                        <td class="actions">
+                            @if (shiftType == "WORK")
+                            {
+                                    <button class="btn-edit"
+                                            onclick="Schedule.openLeaveEmployee(@item.ScheduleId)">
+                                        sửa
+                                    </button>
+                            }
+
+
+                                <button class="btn-delete"
+                                        onclick="Schedule.deleteSchedule(@item.ScheduleId, '@shiftType')">
+                                    Xóa
+                                </button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+    </div>
+    <div class="pagination-container">
+        <div class="pagination">
+
+            @{
+                int current = ViewBag.CurrentPage;
+                int total = ViewBag.TotalPages;
+            }
+
+            @* Previous *@
+            @if (current > 1)
+            {
+                <a class="page-item"
+                   href="@Url.Action("Index", new {
+                   page = current - 1,
+                   keyword = q("keyword"),
+                   departmentId = q("departmentId"),
+                   shiftId = q("shiftId"),
+                   fromDate = q("fromDate"),
+                   toDate = q("toDate"),
+                   shiftType = shiftType
+               })">‹</a>
+            }
+
+            @* Trang 1 *@
+            <a class="page-item @(current == 1 ? "active" : "")"
+               href="@Url.Action("Index", new { page = 1, shiftType })">1</a>
+
+            @* Dấu ... trước *@
+            @if (current > 4)
+            {
+                <span class="page-ellipsis">…</span>
+            }
+
+            @* Các trang quanh current *@
+            @for (int i = Math.Max(2, current - 1); i <= Math.Min(total - 1, current + 1); i++)
+            {
+                <a class="page-item @(i == current ? "active" : "")"
+                   href="@Url.Action("Index", new {
+                   page = i,
+                   keyword = q("keyword"),
+                   departmentId = q("departmentId"),
+                   shiftId = q("shiftId"),
+                   fromDate = q("fromDate"),
+                   toDate = q("toDate"),
+                   shiftType = shiftType
+               })">@i</a>
+            }
+
+            @* Dấu ... sau *@
+            @if (current < total - 3)
+            {
+                <span class="page-ellipsis">…</span>
+            }
+
+            @* Trang cuối *@
+            @if (total > 1)
+            {
+                <a class="page-item @(current == total ? "active" : "")"
+                   href="@Url.Action("Index", new { page = total, shiftType })">@total</a>
+            }
+
+            @* Next *@
+            @if (current < total)
+            {
+                <a class="page-item"
+                   href="@Url.Action("Index", new {
+                   page = current + 1,
+                   keyword = q("keyword"),
+                   departmentId = q("departmentId"),
+                   shiftId = q("shiftId"),
+                   fromDate = q("fromDate"),
+                   toDate = q("toDate"),
+                   shiftType = shiftType
+               })">›</a>
+            }
+
+        </div>
+    </div>
+
+
+
+   
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    window.DEPARTMENTS = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(ViewBag.Departments)
+    );
+</script>
+
+<script src="~/js/lichlam/schedule.js?v=@DateTime.Now.Ticks"></script>

@@ -1,0 +1,314 @@
+﻿@model QLNS.Models.ViewModels.ReportViewModel
+@{
+    ViewData["Title"] = "Báo cáo nhân sự & chấm công";
+}
+
+<div class="container-fluid mt-3">
+
+    <!-- ================= FILTER ================= -->
+    <form method="get" class="row g-2 mb-4 align-items-end">
+        <div class="col-md-3">
+            <label class="form-label fw-bold">Phòng ban</label>
+            <select name="departmentId" class="form-select">
+                <option value="">-- Tất cả --</option>
+                @foreach (var d in ViewBag.Departments)
+                {
+                    <option value="@d.Id" selected="@(Model.DepartmentId == d.Id)">
+                        @d.DepartmentName
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label fw-bold">Tháng</label>
+            <input type="month" name="month"
+                   class="form-control"
+                   value="@(Model.Month?.ToString("yyyy-MM"))" />
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">
+                📊 Xem báo cáo
+            </button>
+        </div>
+
+        <div class="col-md-2">
+            <a class="btn btn-success w-100"
+               asp-action="ExportExcel"
+               asp-route-departmentId="@Model.DepartmentId"
+               asp-route-month="@Model.Month">
+                🖨️ Xuất Excel
+            </a>
+        </div>
+    </form>
+
+ 
+
+    <!-- ================= KPI ================= -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Tổng nhân viên</small>
+                    <h3>@Model.TotalEmployees</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Đang làm</small>
+                    <h3 class="text-success">@Model.ActiveEmployees</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Lượt đi trễ</small>
+                    <h3 class="text-danger">@Model.TotalLateCount</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Tổng công tháng</small>
+                    <h3 class="text-primary">@Model.TotalWorkUnits</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PHÒNG BAN ================= -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header fw-bold">
+            📁 Danh sách phòng ban
+        </div>
+        <table class="table table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Phòng ban</th>
+                    <th>Tổng NV</th>
+                    <th>Đang làm</th>
+                    <th>Đã nghỉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model.Departments)
+                {
+                    <tr>
+                        <td>@d.DepartmentName</td>
+                        <td>@d.TotalEmployees</td>
+                        <td class="text-success fw-bold">@d.ActiveEmployees</td>
+                        <td class="text-danger">@d.InactiveEmployees</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ================= CÔNG CHI TIẾT THEO NHÂN VIÊN ================= -->
+    @if (Model.Month.HasValue)
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header fw-bold">
+                🧮 Công chi tiết theo nhân viên
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Mã NV</th>
+                            <th>Họ tên</th>
+                            <th>Phòng ban</th>
+                            <th>Chức vụ</th>
+                            <th>Ngày làm</th>
+                            <th>Đi trễ</th>
+                            <th>Công</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model.Employees)
+                        {
+                            <tr>
+                                <td>@e.EmployeeCode</td>
+                                <td>@e.FullName</td>
+                                <td>@e.DepartmentName</td>
+                                <td>@e.Position</td>
+                                <td>@e.WorkingDays</td>
+                                <td class="text-danger fw-bold">@e.LateCount</td>
+                                <td class="fw-bold text-primary">@e.TotalWorkUnits</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <!-- ================= BIẾN ĐỘNG NHÂN SỰ ================= -->
+    @if (Model.Movements.Any())
+    {
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header fw-bold">
+                🔄 Biến động nhân sự trong tháng
+            </div>
+
+            <table class="table table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Mã NV</th>
+                        <th>Họ tên</th>
+                        <th>Phòng ban</th>
+                        <th>Ngày</th>
+                        <th>Loại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model.Movements)
+                    {
+                        <tr>
+                            <td>@m.EmployeeCode</td>
+                            <td>@m.FullName</td>
+                            <td>@m.DepartmentName</td>
+                            <td>@m.Date.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="badge @(m.MovementType == "Join" ? "bg-success" : "bg-danger")">
+                                    @m.MovementType
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @if (!Model.AttendanceRanking.Any(x =>
+    x.EarlyCount > 0 || x.OnTimeCount > 0 || x.LateCount > 0))
+    {
+        <div class="alert alert-warning text-center fw-bold">
+            ⚠️ Chưa có thông tin chấm công nhân viên trong tháng này
+        </div>
+    }
+    else
+    {
+        <div class="row mb-4">
+
+            <!-- ================= TOP ĐI TRỄ ================= -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header fw-bold text-danger">
+                        🚨 TOP ĐI TRỄ
+                    </div>
+
+                    <table class="table table-bordered table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng</th>
+                                <th>Lần trễ</th>
+                                <th>Phút trễ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int rankLate = 1;
+                            }
+                            @foreach (var e in Model.AttendanceRanking
+                           .Where(x => x.LateCount > 0)
+                           .OrderByDescending(x => x.LateCount)
+                           .ThenByDescending(x => x.TotalLateMinutes)
+                           .Take(5))
+                            {
+                                <tr>
+                                    <td>@rankLate</td>
+                                    <td>@e.EmployeeCode</td>
+                                    <td>@e.FullName</td>
+                                    <td>@e.DepartmentName</td>
+                                    <td class="text-danger fw-bold">@e.LateCount</td>
+                                    <td class="text-danger">@e.TotalLateMinutes</td>
+                                </tr>
+                                rankLate++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ================= TOP ĐI SỚM + ĐÚNG GIỜ ================= -->
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header fw-bold text-success">
+                        🌱 TOP ĐI SỚM
+                    </div>
+
+                    <table class="table table-bordered table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng</th>
+                                <th>Số lần sớm</th>
+                                <th>Giờ sớm nhất</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var topEarly = Model.AttendanceRanking
+                                .Where(x => x.EarlyCount > 0)
+                                .OrderByDescending(x => x.EarlyCount)
+                                .ThenBy(x => x.EarliestCheckIn)
+                                .Take(10)
+                                .ToList();
+
+                                int rankGood = 1;
+                            }
+
+                            @if (!topEarly.Any())
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted fst-italic py-4">
+                                        ⏳ Chưa có thông tin nhân viên
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var e in topEarly)
+                                {
+                                    <tr>
+                                        <td>@rankGood</td>
+                                        <td>@e.EmployeeCode</td>
+                                        <td>@e.FullName</td>
+                                        <td>@e.DepartmentName</td>
+                                        <td class="text-success fw-bold">@e.EarlyCount</td>
+                                        <td class="fw-bold text-primary">
+                                            @(e.EarliestCheckIn?.ToString("HH:mm") ?? "--")
+                                        </td>
+                                    </tr>
+                                    rankGood++;
+                                }
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <small class="text-muted fst-italic">
+                * Chỉ hiển thị Top 10. Danh sách đầy đủ vui lòng xuất Excel.
+            </small>
+
+
+        </div>
+    }
+
+
+</div>

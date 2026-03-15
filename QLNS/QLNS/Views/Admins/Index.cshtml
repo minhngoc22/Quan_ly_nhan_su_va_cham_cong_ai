@@ -1,0 +1,143 @@
+﻿@model QLNS.Models.ViewModels.AdminDashboardVM
+@{
+    ViewData["Title"] = "Bảng điều khiển";
+}
+<link rel="stylesheet" href="~/css/admin.css?v=@DateTime.Now.Ticks" />
+<div class="main-content">
+    <div class="dashboard">
+
+        <!-- ================= HEADER ================= -->
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">Bảng điều khiển</h1>
+                <p class="page-subtitle">Tổng quan hệ thống FaceID HRMS</p>
+            </div>
+
+           
+        </div>
+
+        <!-- ================= KPI ================= -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <p>Tổng nhân viên</p>
+                <h2>@Model.TotalEmployees</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Nhân viên hoạt động</p>
+                <h2>@Model.ActiveEmployees</h2>
+            </div>
+
+            <div class="stat-card highlight">
+                <p>Chấm công hôm nay</p>
+                <h2>@Model.TodayAttendance</h2>
+            </div>
+
+            <div class="stat-card warning">
+                <p>Đi trễ hôm nay</p>
+                <h2>@Model.LateToday</h2>
+            </div>
+
+            <div class="stat-card danger">
+                <p>Vắng hôm nay</p>
+                <h2>@Model.AbsentToday</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Chưa đăng ký FaceID</p>
+                <h2>@Model.EmployeesWithoutFace</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Cảnh báo AI</p>
+                <h2>@Model.TodayAlerts</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Camera hoạt động</p>
+                <h2>@Model.ActiveCameras</h2>
+            </div>
+
+        </div>
+        </div>
+
+        <!-- ================= ACTIVITY + ALERT ================= -->
+        <div class="row g-4 mt-3">
+
+            <!-- ===== SYSTEM ACTIVITY ===== -->
+            <div class="col-12 col-lg-8">
+                <div class="activity">
+
+                    <div class="activity-header">
+                        <h3>Hoạt động hệ thống</h3>
+                        <p class="activity-sub">Nhật ký gần nhất</p>
+                    </div>
+
+                    <div class="activity-scroll">
+                        <ul class="activity-list">
+
+                            @if (Model.RecentLogs != null && Model.RecentLogs.Any())
+                            {
+                                foreach (var log in Model.RecentLogs)
+                                {
+                                    <li class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="fw-semibold">@log.Action</span><br />
+                                            <small class="text-muted">
+                                                @log.UserName - @log.Description
+                                            </small>
+                                        </div>
+
+                                        <em>
+                                            @log.CreatedAt?.ToString("dd/MM/yyyy HH:mm")
+                                        </em>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <em>Chưa có hoạt động hệ thống</em>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ===== ALERT PANEL (BÊN PHẢI) ===== -->
+            <div class="col-12 col-lg-4">
+                <div class="activity warning">
+
+                    <div class="activity-header">
+                        <h3>⚠️ Cảnh báo AI</h3>
+                        <p class="activity-sub">Security Alerts</p>
+                    </div>
+
+                    <ul class="activity-list">
+                        <li>
+                            <span class="fw-bold">@Model.TodayAlerts</span>
+                            <small>Cảnh báo hôm nay</small>
+                        </li>
+
+                        <li>
+                            <span class="fw-bold">@Model.UnknownPersons</span>
+                            <small>Người lạ phát hiện</small>
+                        </li>
+
+                        <li>
+                            <span class="fw-bold">@Model.LivenessFails</span>
+                            <small>Fail Liveness</small>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+      
+
+    </div>

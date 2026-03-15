@@ -1,0 +1,212 @@
+HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY HỆ THỐNG CHẤM CÔNG AI (PYTHON + .NET 8)
+
+================================================== 1. CÀI ĐẶT PHẦN MỀM
+CẦN THIẾT ==================================================
+
+1.  Cài SQL Server
+
+-   Cài đặt Microsoft SQL Server
+-   Cài thêm SQL Server Management Studio (SSMS) để quản lý database.
+
+2.  Cài .NET 8 SDK
+
+-   Tải và cài đặt .NET 8 SDK từ Microsoft.
+-   Kiểm tra bằng lệnh: dotnet –version
+
+3.  Cài Python
+
+-   Cài Python 3.10 trở lên.
+-   Kiểm tra: python –version
+
+================================================== 2. SETUP DATABASE SQL
+SERVER ==================================================
+
+Bước 1: Mở SQL Server Management Studio
+
+Bước 2: Kết nối Server Ví dụ: Server Name: LAPTOP-XXXX Authentication:
+SQL Server Authentication Login: sa Password: *****
+
+Bước 3: Mở file SQL Trong project có file: QuanLyNhanSu.sql
+
+Bước 4: Chạy file SQL Nhấn Execute để tạo: - Database - Tables - Dữ liệu
+mẫu
+
+================================================== 3. CHẠY DỰ ÁN ASP.NET
+CORE (.NET 8) ==================================================
+
+Bước 1: Mở project Mở file: QLNS.sln bằng Visual Studio.
+
+Bước 2: Cài thư viện Nuget
+
+Vào: Tools → Nuget Package Manager → Package Manager Console
+
+Chạy các lệnh:
+
+Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+-Version 8.0.0
+
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 8.0.0
+
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+================================================== 4. ÁNH XẠ DATABASE
+VÀO MODEL ==================================================
+
+Nếu trong project CHƯA có Models:
+
+Scaffold-DbContext “Server=LAPTOP-GOC9P0UG;Database=FaceID_HRMS;User
+Id=sa;Password=123;Trust Server Certificate=True;”
+Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+Nếu đã có Models và muốn ghi đè:
+
+Scaffold-DbContext “Server=LAPTOP-GOC9P0UG;Database=FaceID_HRMS;User
+Id=sa;Password=123;Trust Server Certificate=True;”
+Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+
+================================================== 5. CHẠY WEB .NET
+==================================================
+
+Trong Visual Studio:
+
+Nhấn: Ctrl + F5
+
+hoặc
+
+Run IIS Express
+
+Website sẽ chạy tại: https://localhost:xxxx
+
+================================================== 6. SETUP PYTHON FACE
+RECOGNITION ==================================================
+
+Di chuyển vào thư mục:
+
+Face_ID
+
+Tạo môi trường Python:
+
+python -m venv venv
+
+Kích hoạt môi trường:
+
+Windows: venv
+
+Cài các thư viện cần thiết:
+
+pip install opencv-python
+pip install numpy
+pip install pillow
+pip install insightface
+pip install fastapi
+pip install uvicorn
+pip install pyodbc
+pip install requests
+pip install torch
+pip install torchreid
+pip install ultralytics
+
+================================================== 7. CẤU HÌNH KẾT NỐI
+SQL CHO PYTHON ==================================================
+
+Mở file:
+
+Face_ID/chamcong/ketnoi_SQL.py
+
+Sửa thông tin:
+
+server = ‘LAPTOP-GOC9P0UG’ database = ‘FaceID_HRMS’ username = ‘sa’
+password = ‘123’
+
+================================================== 8. CHẠY HỆ THỐNG CHẤM
+CÔNG AI ==================================================
+
+Mở terminal tại thư mục Face_ID
+
+Chạy:
+
+.venv\Scripts\activate
+uvicorn main:app
+
+================================================== 9. KIỂM TRA HỆ THỐNG
+==================================================
+
+Hệ thống hoạt động theo thứ tự:
+
+Camera → Python AI nhận diện khuôn mặt → Lưu dữ liệu vào SQL Server →
+Web ASP.NET hiển thị dữ liệu chấm công
+
+================================================== 10. LƯU Ý
+==================================================
+
+-   Phải chạy SQL Server trước.
+-   Sau đó chạy Web ASP.NET.
+-   Cuối cùng chạy Python Face Recognition.
+-   Kiểm tra lại thông tin Server và Database nếu bị lỗi kết nối.
+==================================================
+11. CẤU HÌNH THÔNG BÁO DISCORD (OPTIONAL)
+==================================================
+
+Hệ thống có chức năng gửi cảnh báo lên Discord khi phát hiện
+người lạ qua camera.
+
+File xử lý:
+discord_notify.py
+
+Trong file có dòng:
+
+WEBHOOK_URL = "https://discord.com/api/webhooks/...."
+
+Đây là Discord Webhook dùng để gửi tin nhắn tự động
+từ hệ thống AI sang kênh Discord.
+
+Cách tạo Webhook:
+
+Bước 1: Mở Discord Server
+
+Bước 2: Chọn
+Server Settings
+→ Integrations
+→ Webhooks
+
+Bước 3: Chọn
+New Webhook
+
+Bước 4: Copy Webhook URL
+
+Bước 5: Dán vào code
+
+WEBHOOK_URL = "LINK_WEBHOOK_CUA_BAN"
+
+Sau khi cấu hình xong:
+
+Khi camera phát hiện người lạ, hệ thống sẽ:
+- gửi cảnh báo lên Discord
+- gửi hình ảnh người lạ (nếu bật chức năng)
+
+Ví dụ thông báo:
+
+⚠️ Phát hiện người lạ
+
+Lưu ý:
+Không nên public webhook lên GitHub vì có thể bị spam.
+========================================================
+12. Hướng dẫn build source cho python và .net
+Build .Net:
+Mở terminal lên -> chạy : dotnet publish -c Release -o publish 
+=>Sau khi chạy xong
+
+Sẽ xuất hiện folder:
+
+QLNS
+ ├ publish
+ │   ├ QLNS.exe
+ │   ├ QLNS.dll
+ │   ├ appsettings.json
+ │   ├ wwwroot
+=>Chạy web
+cd publish
+QLNS.exe
+
+Build python:
+Mở terminal lên -> chạy: pyinstaller main.py --onedir --name main --add-data "models;models" --add-data "icons;icons"  --collect-all insightface

@@ -1,0 +1,123 @@
+﻿@model QLNS.Models.ViewModels.MyScheduleViewModel
+
+<link rel="stylesheet" href="~/css/lichlam/Mylichlam.css?v=@DateTime.Now.Ticks" />
+
+@{
+    ViewData["Title"] = "Lịch làm việc của tôi";
+    var firstDay = new DateTime(Model.Year, Model.Month, 1);
+    int startOffset = ((int)firstDay.DayOfWeek + 6) % 7; // Thứ 2 = 0
+}
+
+<div class="container-fluid">
+
+    <!-- ===== TAB ===== -->
+    <div class="btn-group mb-3">
+        <a class="btn @(Model.Type == "WORK" ? "btn-danger" : "btn-outline-danger")"
+        asp-action="MySchedule"
+        asp-route-type="WORK"
+        asp-route-month="@Model.Month"
+        asp-route-year="@Model.Year">
+            🗓 Lịch làm
+        </a>
+
+        <a class="btn @(Model.Type == "DUTY" ? "btn-danger" : "btn-outline-danger")"
+        asp-action="MySchedule"
+        asp-route-type="DUTY"
+        asp-route-month="@Model.Month"
+        asp-route-year="@Model.Year">
+            🛎 Lịch trực
+        </a>
+
+        <!-- ✅ TAB MỚI -->
+        <a class="btn @(Model.Type == "LEAVE" ? "btn-danger" : "btn-outline-danger")"
+        asp-action="MySchedule"
+        asp-route-type="LEAVE"
+        asp-route-month="@Model.Month"
+        asp-route-year="@Model.Year">
+            🛌 Ngày nghỉ
+        </a>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <div class="calendar-header">
+        <a class="btn btn-light btn-sm"
+        asp-action="MySchedule"
+        asp-route-type="@Model.Type"
+        asp-route-month="@(Model.Month == 1 ? 12 : Model.Month - 1)"
+        asp-route-year="@(Model.Month == 1 ? Model.Year - 1 : Model.Year)">
+            ◀
+        </a>
+
+        <h5 class="mb-0">
+            @(Model.Type == "WORK" ? "📅 LỊCH LÀM VIỆC"
+                    : Model.Type == "DUTY" ? "🛎 LỊCH TRỰC"
+                    : "🛌 LỊCH NGHỈ")
+            THÁNG @Model.Month/@Model.Year
+        </h5>
+
+        <a class="btn btn-light btn-sm"
+        asp-action="MySchedule"
+        asp-route-type="@Model.Type"
+        asp-route-month="@(Model.Month == 12 ? 1 : Model.Month + 1)"
+        asp-route-year="@(Model.Month == 12 ? Model.Year + 1 : Model.Year)">
+            ▶
+        </a>
+    </div>
+
+    <!-- ===== WEEKDAYS ===== -->
+    <div class="calendar-grid">
+        <div class="weekday">Thứ 2</div>
+        <div class="weekday">Thứ 3</div>
+        <div class="weekday">Thứ 4</div>
+        <div class="weekday">Thứ 5</div>
+        <div class="weekday">Thứ 6</div>
+        <div class="weekday">Thứ 7</div>
+        <div class="weekday">CN</div>
+
+        <!-- Ô trống đầu tháng -->
+        @for (int i = 0; i < startOffset; i++)
+        {
+            <div class="day"></div>
+        }
+
+        <!-- NGÀY -->
+        @foreach (var day in Model.Days.OrderBy(x => x.Date))
+        {
+            var isToday = day.Date.Date == DateTime.Today;
+
+            <div class="day @day.Status @(isToday ? "today" : "")">
+                <div class="day-number">@day.Date.Day</div>
+
+                @if (!day.IsFuture && day.TotalShifts > 0)
+                {
+                    <small>@day.WorkedShifts / @day.TotalShifts ca</small>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- ===== LEGEND ===== -->
+    <div class="legend mt-3">
+        @if (Model.Type == "WORK")
+        {
+            <span class="green">🟢 Đủ 2 ca</span>
+            <span class="yellow">🟡 Làm 1 ca</span>
+            <span class="red">🔴 Vắng</span>
+            <span class="white">⚪ Chưa tới / Không làm</span>
+        }
+        else if (Model.Type == "DUTY")
+        {
+            <span class="green">🟢 Đã trực</span>
+            <span class="yellow">🟡 Có lịch trực (chưa tới)</span>
+            <span class="red">🔴 Có lịch nhưng chưa trực</span>
+            <span class="white">⚪ Không có lịch trực</span>
+        }
+        else if (Model.Type == "LEAVE")
+        {
+            <span class="blue">🟢 Ngày nghỉ đã duyệt</span>
+            <span class="white">⚪ Không nghỉ</span>
+        }
+    </div>
+
+
+</div>

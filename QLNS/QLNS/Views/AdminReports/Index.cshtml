@@ -1,0 +1,190 @@
+﻿@model QLNS.Models.ViewModels.AdminReportVM
+@{
+    ViewData["Title"] = "Báo cáo hệ thống";
+}
+
+<div class="container-fluid mt-3">
+
+    <!-- ================= FILTER ================= -->
+    <form method="get" class="row g-2 mb-4 align-items-end">
+
+        <form method="get" class="row g-2 mb-4 align-items-end">
+
+            <!-- TYPE -->
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Loại báo cáo</label>
+                <select name="type" class="form-select">
+                    <option value="MONTH">Theo tháng</option>
+                    <option value="YEAR">Theo năm</option>
+                </select>
+            </div>
+
+            <!-- MONTH -->
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Tháng</label>
+                <input type="month"
+                       name="month"
+                       class="form-control"
+                       value="@DateTime.Today.ToString("yyyy-MM")" />
+            </div>
+
+            <!-- YEAR -->
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Năm</label>
+                <input type="number"
+                       name="year"
+                       class="form-control"
+                       value="@DateTime.Today.Year" />
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    📊 Xem báo cáo
+                </button>
+            </div>
+
+            <div class="col-md-2">
+                <a class="btn btn-success w-100"
+                   asp-action="ExportExcel">
+                    🖨️ Xuất Excel
+                </a>
+            </div>
+
+        </form>
+       
+
+       
+
+    </form>
+
+    <!-- ================= KPI ================= -->
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Tổng nhân viên</small>
+                    <h3>@Model.TotalEmployees</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Nhân viên hoạt động</small>
+                    <h3 class="text-success">@Model.ActiveEmployees</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Tổng người dùng hệ thống</small>
+                    <h3 class="text-primary">@Model.TotalUsers</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <small>Camera đang hoạt động</small>
+                    <h3 class="text-info">@Model.ActiveCameras</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= ATTENDANCE ================= -->
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <small>Check-in hôm nay</small>
+                    <h2 class="text-primary">@Model.TodayAttendance</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <small>Đi trễ hôm nay</small>
+                    <h2 class="text-danger">@Model.LateToday</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <small>Người lạ phát hiện</small>
+                    <h2 class="text-warning">@Model.UnknownPersons</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= AI ALERT ================= -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header fw-bold">
+            Cảnh báo AI
+        </div>
+
+        <table class="table table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Loại cảnh báo</th>
+                    <th>Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.AlertByType)
+                {
+                    <tr>
+                        <td>@a.AlertType</td>
+                        <td class="fw-bold text-danger">@a.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ================= TOP USERS ================= -->
+    <div class="card shadow-sm">
+        <div class="card-header fw-bold">
+            🔥 TOP NGƯỜI DÙNG HOẠT ĐỘNG HỆ THỐNG
+        </div>
+
+        <table class="table table-hover table-bordered mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Tổng hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int rank = 1;
+                }
+
+                @foreach (var u in Model.TopUsers)
+                {
+                    <tr>
+                        <td>@rank</td>
+                        <td>@u.Username</td>
+                        <td class="fw-bold text-primary">@u.TotalActions</td>
+                    </tr>
+                    rank++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

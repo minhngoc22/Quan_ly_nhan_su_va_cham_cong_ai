@@ -1,0 +1,100 @@
+﻿@model IEnumerable<QLNS.Models.Department>
+
+@{
+    ViewData["Title"] = "Quản lý phòng ban";
+}
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1 class="page-title">Quản lý phòng ban</h1>
+        <p class="page-subtitle">
+            Quản lý thông tin các phòng ban trong hệ thống
+        </p>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <input type="text" placeholder="🔍 Tìm phòng ban..." />
+
+        <button class="btn btn-add" onclick="Department.openCreate()">
+            + Thêm phòng ban
+        </button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã phòng ban</th>
+                    <th>Tên phòng ban</th>
+                    <th>Mô tả</th>
+                    <th>Số nhân viên</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" style="text-align:center">
+                            Không có dữ liệu phòng ban
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.DepartmentCode</td>
+
+                            <td>
+                                <strong>@item.DepartmentName</strong>
+                            </td>
+
+                            <td>@item.Description</td>
+
+                            <td>
+                                <span class="badge badge-morning">
+                                    @(item.Employees?.Count ?? 0) người
+                                </span>
+                            </td>
+
+                           
+
+                            <td class="actions">
+
+                                <button class="btn-edit"
+                                        onclick="Department.openEdit(
+                @item.Id,
+                '@item.DepartmentCode',
+                '@item.DepartmentName',
+                '@item.Description'
+            )">
+                                    Sửa
+                                </button>
+
+                                <button class="btn-delete"
+                                        onclick="Department.delete(@item.Id)">
+                                    Xóa
+                                </button>
+
+                            
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="~/js/department.js"></script>

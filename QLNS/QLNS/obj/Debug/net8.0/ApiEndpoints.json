@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "QLNS.Controllers.LeaveController",
+    "Method": "CreateCompanyLeave",
+    "RelativePath": "Leave/CreateCompanyLeave",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QLNS.Models.DTO.CreateCompanyLeaveDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QLNS.Controllers.LeaveController",
+    "Method": "CreateFromSchedule",
+    "RelativePath": "Leave/CreateFromSchedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "QLNS.Models.DTO.CreateLeaveFromScheduleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

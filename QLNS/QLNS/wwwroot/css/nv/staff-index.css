@@ -1,0 +1,31 @@
+﻿
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 8px;
+}
+
+.day {
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    background: #f1f3f5;
+}
+
+    .day.green {
+        background: #d1e7dd;
+        color: #0f5132
+    }
+
+    .day.yellow {
+        background: #fff3cd;
+        color: #664d03
+    }
+
+    .day.red {
+        background: #f8d7da;
+        color: #842029
+    }

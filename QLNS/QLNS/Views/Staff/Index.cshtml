@@ -1,0 +1,174 @@
+﻿@model QLNS.Models.ViewModels.StaffDashboardViewModel
+
+<link rel="stylesheet" href="/css/nv/staff-index.css" />
+@{
+    ViewData["Title"] = "Trang nhân viên";
+}
+
+<div class="row g-4">
+
+    <!-- ================= PROFILE ================= -->
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 h-100">
+            <div class="text-center">
+                <img src="@(Model.Profile.Avatar ?? "/images/avatar-default.png")"
+                     class="rounded-circle mb-3"
+                     style="width:120px;height:120px;object-fit:cover" />
+
+                <h5 class="mb-0">@Model.Profile.FullName</h5>
+                <small class="text-muted">
+                    @Model.Profile.PositionName
+                    @if (!string.IsNullOrEmpty(Model.Profile.ExperienceLevelName))
+                    {
+                        <span>• @Model.Profile.ExperienceLevelName</span>
+                    }
+                </small>
+            </div>
+
+            <hr />
+
+            <ul class="list-unstyled small mb-0">
+                <li>🆔 <b>Mã NV:</b> @Model.Profile.EmployeeCode</li>
+                <li>🏢 <b>Phòng ban:</b> @Model.Profile.DepartmentName</li>
+                <li>📧 <b>Email:</b> @Model.Profile.Email</li>
+                <li>📞 <b>SĐT:</b> @Model.Profile.Phone</li>
+                <li>🏠 <b>Địa chỉ:</b> @Model.Profile.Address</li>
+                <li>👤 <b>Giới tính:</b> @Model.Profile.Gender</li>
+
+                @if (Model.Profile.DateOfBirth.HasValue)
+                {
+                    <li>🎂 <b>Ngày sinh:</b> @Model.Profile.DateOfBirth.Value.ToString("dd/MM/yyyy")</li>
+                }
+
+                <li>
+                    ⚙️ <b>Trạng thái:</b>
+                    <span class="badge
+                    @(Model.Profile.Status == "Active" ? "bg-success" : "bg-secondary")">
+                        @Model.Profile.Status
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- ================= ATTENDANCE ================= -->
+    <div class="col-md-8">
+        <div class="row g-3">
+
+            <!-- CHECK IN -->
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm h-100 d-flex flex-column">
+                    <h6>📷 Chấm công</h6>
+
+                    <!-- spacer -->
+                    <div class="flex-grow-1 d-flex flex-column justify-content-center">
+                        <button id="btnCheckIn"
+                                class="btn btn-success w-100 mb-2">
+                            Chấm công FaceID
+                        </button>
+
+                        <button id="btnStopCamera"
+                                class="btn btn-danger w-100"
+                                style="display:none">
+                            Tắt camera
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- TODAY -->
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm h-100">
+                    <h6>📅 Hôm nay</h6>
+                    <p class="mb-1">@DateTime.Today.ToString("dd/MM/yyyy")</p>
+
+                    @{
+                        var today = Model.Schedule.Days
+                        .FirstOrDefault(x => x.Date.Date == DateTime.Today);
+                    }
+
+                    <span class="badge bg-info">
+                        @(today == null
+                            ? "Không có lịch"
+                            : $"{today.WorkedShifts}/{today.TotalShifts} ca")
+                    </span>
+                </div>
+            </div>
+
+            <!-- STAT -->
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h6>📊 Thống kê</h6>
+
+                    <p class="text-success mb-1">
+                        ✔ @Model.Schedule.Days.Count(x => x.Status == "green") ngày đủ ca
+                    </p>
+
+                    <p class="text-warning mb-1">
+                        ⚠ @Model.Schedule.Days.Count(x => x.Status == "yellow") ngày thiếu ca
+                    </p>
+
+                    <p class="text-danger mb-0">
+                        ✖ @Model.Schedule.Days.Count(x => x.Status == "red") ngày vắng
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= CALENDAR ================= -->
+        <div class="card shadow-sm p-3 mt-3">
+            <h6 class="mb-3 d-flex align-items-center gap-2">
+                🗓 Tổng quan lịch tháng
+                <span class="badge">
+                    @Model.Schedule.Month/@Model.Schedule.Year
+                </span>
+            </h6>
+
+
+            <div class="calendar-grid">
+                @foreach (var d in Model.Schedule.Days)
+                {
+                    <div class="day @d.Status">
+                        @d.Date.Day
+                    </div>
+                }
+            </div>
+
+            <div class="mt-3 small">
+                <span class="badge bg-success">Đủ ca</span>
+                <span class="badge bg-warning text-dark">Thiếu ca</span>
+                <span class="badge bg-danger">Vắng</span>
+                <span class="badge bg-light text-dark">Chưa tới</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const btnCheckIn = document.getElementById("btnCheckIn");
+    const btnStop = document.getElementById("btnStopCamera");
+
+    btnCheckIn.onclick = () => {
+        if (!confirm("Bắt đầu chấm công FaceID?")) return;
+        fetch("/Attendance/CheckIn", { method: "POST" })
+            .then(r => r.json())
+            .then(d => {
+                if (!d.success) return alert(d.message);
+                btnCheckIn.style.display = "none";
+                btnStop.style.display = "block";
+            });
+    };
+
+    btnStop.onclick = () => {
+        fetch("/Attendance/StopCamera", { method: "POST" })
+            .then(() => {
+                btnStop.style.display = "none";
+                btnCheckIn.style.display = "block";
+            });
+    };
+</script>
