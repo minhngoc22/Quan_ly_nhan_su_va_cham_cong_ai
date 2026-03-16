@@ -715,6 +715,10 @@ def save_early_checkin(employee_id, shift_id, now, similarity):
     except Exception as e:
         print("❌ EarlyCheckinLogs error:", e)
 def convert_early_checkin(now):
+
+    if not SHIFT_DB:
+        reload_shifts()
+
     try:
         cur = conn.cursor()
 
@@ -722,19 +726,18 @@ def convert_early_checkin(now):
         SELECT Id, EmployeeId, ShiftId, DetectedTime
         FROM EarlyCheckinLogs
         WHERE IsConverted = 0
-        AND WorkDate = CAST(? AS DATE)
-        """, now)
+        AND WorkDate = ?
+        """, now.date())
 
         rows = cur.fetchall()
 
-        for r in rows:
+        for row in rows:
 
-            log_id = r[0]
-            emp_id = r[1]
-            shift_id = r[2]
-            detected = r[3]
+            log_id = row[0]
+            emp_id = row[1]
+            shift_id = row[2]
+            detected = row[3]
 
-            # check shift info
             shift = next((s for s in SHIFT_DB if s["id"] == shift_id), None)
 
             if not shift:
@@ -748,24 +751,32 @@ def convert_early_checkin(now):
             if detected.time() > shift["late"]:
                 status = "Trễ"
 
+            # check đã chấm chưa
             cur.execute("""
-                IF NOT EXISTS(
-                    SELECT 1 FROM Attendance
-                    WHERE EmployeeId = ?
-                    AND ShiftId = ?
-                    AND CAST(CheckTime AS DATE)=CAST(? AS DATE)
-                )
+            SELECT 1 FROM Attendance
+            WHERE EmployeeId = ?
+            AND ShiftId = ?
+            AND CAST(CheckTime AS DATE) = ?
+            """, emp_id, shift_id, now.date())
+
+            if not cur.fetchone():
+
+                cur.execute("""
                 INSERT INTO Attendance
                 (EmployeeId, ShiftId, CheckTime, Status, SimilarityScore)
                 VALUES (?, ?, ?, ?, ?)
-            """,
-            emp_id, shift_id, detected,
-            emp_id, shift_id, detected, status, 0.9)
+                """,
+                emp_id,
+                shift_id,
+                now,
+                status,
+                0.9
+                )
 
             cur.execute("""
-                UPDATE EarlyCheckinLogs
-                SET IsConverted = 1
-                WHERE Id = ?
+            UPDATE EarlyCheckinLogs
+            SET IsConverted = 1
+            WHERE Id = ?
             """, log_id)
 
         conn.commit()
@@ -890,7 +901,7 @@ def checkin_frame(frame):
 
 
 
-    if time.time() - last_convert_time > 60:
+    if time.time() - last_convert_time > 5:
         convert_early_checkin(now)
         last_convert_time = time.time()
 
