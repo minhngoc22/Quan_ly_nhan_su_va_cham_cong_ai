@@ -629,6 +629,9 @@ last_face_reload = 0
 face_score_buffer = []
 last_convert_time = 0
 
+unknown_counter = 0
+UNKNOWN_THRESHOLD = 5
+
 import datetime
 import cv2
 #=====Lưu vào MovementLogs========
@@ -866,8 +869,7 @@ def resolve_shift(now, employee_id=None):
 def checkin_frame(frame):
     global last_detect_time, locked, lock_start
     global faces, best_match, best_score, last_result
-    global last_convert_time
-
+    global last_convert_time,unknown_counter
     global last_face_reload
 
     if time.time() - last_face_reload > FACE_RELOAD_INTERVAL:
@@ -999,12 +1001,18 @@ def checkin_frame(frame):
     # ===== UNKNOWN / FAIL =====
     if best_score < FACE_NORMAL_THRESHOLD:
 
-        face_score_buffer.clear()
+        unknown_counter += 1
 
-        save_movement_log(frame, CAMERA_ID, similarity=best_score)
-        save_security_alert(CAMERA_ID)
+        # chỉ báo khi liên tục nhiều frame
+        if unknown_counter >= UNKNOWN_THRESHOLD:
+            face_score_buffer.clear()
 
-        send_unknown_alert()
+            save_movement_log(frame, CAMERA_ID, similarity=best_score)
+            save_security_alert(CAMERA_ID)
+
+            send_unknown_alert()
+
+            unknown_counter = 0
 
         if shift is None:
             for s in SHIFT_DB:
