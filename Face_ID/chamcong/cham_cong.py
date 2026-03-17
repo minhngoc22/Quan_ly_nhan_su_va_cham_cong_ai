@@ -747,7 +747,7 @@ def convert_early_checkin(now):
             if now.time() < shift["start"]:
                 continue
 
-            status = "Đúng giờ"
+            status = "Tới sớm"
             if detected.time() > shift["late"]:
                 status = "Trễ"
 
@@ -768,7 +768,7 @@ def convert_early_checkin(now):
                 """,
                 emp_id,
                 shift_id,
-                now,
+                detected,
                 status,
                 0.9
                 )
